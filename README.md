@@ -12,6 +12,7 @@ Organized by concern, one top-level directory each — not one repo per concern,
 
 - **`agents/`** — shared AI-agent collaboration conventions (`AGENTS.common.md`). Consumed via a git submodule plus Claude Code's `@path` import syntax.
 - **`renovate/`** — shared Renovate presets. Consumed via Renovate's native remote-extends syntax — no submodule needed.
+- **`github/`** — shared GitHub repository-settings conventions (e.g. disabling merge commits). Applied by hand today; `settings.yml` is a reference for a future org-wide settings-as-code setup (see `github/README.md`).
 
 ## How consumers use this
 
