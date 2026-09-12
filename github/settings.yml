@@ -1,0 +1,13 @@
+# Reference config for the `github/safe-settings` GitHub App
+# (https://github.com/github/safe-settings), meant to be copied into a future
+# `isejalabs/.github` repo's own `.github/settings.yml` once that app is installed
+# org-wide. Not wired up to any automation yet -- see README.md in this directory.
+#
+# Applies as the default for every repo in the org; safe-settings supports per-repo
+# overrides under that same central repo's `.github/repos/<repo-name>.yml`.
+
+repository:
+  allow_merge_commit: false
+  allow_squash_merge: true
+  allow_rebase_merge: true
+  delete_branch_on_merge: true
