@@ -1,10 +1,12 @@
-# Reference config for the `github/safe-settings` GitHub App
-# (https://github.com/github/safe-settings), meant to be copied into a future
-# `isejalabs/.github` repo's own `.github/settings.yml` once that app is installed
-# org-wide. Not wired up to any automation yet -- see README.md in this directory.
+# Source of truth for GitHub repo settings applied across every isejalabs repo.
+# Read and applied by ../.github/workflows/enforce-repo-settings.yml in this repo, on a
+# weekly schedule and via manual workflow_dispatch. See README.md in this directory for
+# setup (the ORG_SETTINGS_TOKEN secret) and rationale.
 #
-# Applies as the default for every repo in the org; safe-settings supports per-repo
-# overrides under that same central repo's `.github/repos/<repo-name>.yml`.
+# (The github/safe-settings GitHub App (https://github.com/github/safe-settings) covers
+# a lot more than this -- branch protection, labels, team permissions -- but requires
+# hosting a standalone Probot app. Revisit it if this org's settings-as-code needs ever
+# grow beyond repo-level flags.)
 
 repository:
   allow_merge_commit: false
