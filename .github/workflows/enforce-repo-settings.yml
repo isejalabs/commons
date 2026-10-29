@@ -1,0 +1,35 @@
+name: Enforce org repo settings
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Monday 06:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  enforce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Apply github/settings.yml to every isejalabs repo
+        env:
+          GH_TOKEN: ${{ secrets.ORG_SETTINGS_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::error::ORG_SETTINGS_TOKEN secret is not set. See github/README.md." >&2
+            exit 1
+          fi
+
+          args=()
+          for key in $(yq -o=json '.repository' github/settings.yml | jq -r 'keys[]'); do
+            value=$(yq -o=json '.repository' github/settings.yml | jq -r --arg k "$key" '.[$k]')
+            args+=(-F "${key}=${value}")
+          done
+
+          repos=$(gh api orgs/isejalabs/repos --paginate --jq '.[] | select(.archived == false) | .full_name')
+          for repo in $repos; do
+            echo "Applying settings to ${repo}"
+            gh api -X PATCH "repos/${repo}" "${args[@]}"
+          done
