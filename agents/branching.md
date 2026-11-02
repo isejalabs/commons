@@ -4,8 +4,9 @@
 
 Every branch for real work is named `issue/<issue-number>_<shorttext>`, e.g. `issue/123_fix-flux-dependson`.
 Never ship a change on an ad hoc or harness-generated name (e.g. a Claude Code on the web `claude/fancy-foo`
-branch) — treat that as a starting point to rename/recreate from, not the final branch, unless the session's
-own instructions explicitly pin it to that name (in which case say so rather than silently renaming mid-session).
+branch). Such a name may only be used locally: rename or recreate the branch as `issue/<issue-number>_<shorttext>`
+at the latest before its first push, also when the session's own instructions pin the harness name. If those
+instructions forbid pushing to any other branch, stop and ask the owner instead of pushing the harness name.
 
 - `<issue-number>` is a GitHub issue number in this repo — never a placeholder, and never the number of a PR
   or an issue in another repo.
